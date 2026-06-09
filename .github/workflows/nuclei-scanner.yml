@@ -20,7 +20,12 @@ jobs:
           config: |
             target: 
             - https://jester.social
-            flags: "-id ssh-auth-methods -id tls-version -id rails-debug-mode -id rdap-whois -id ssl-issuer -id http-missing-security-headers"
+            id:
+            - ssh-auth-methods
+            - tls-version
+            - rails-debug-mode
+            - ssl-issuer
+            - http-missing-security-headers
             user-agent: "User-Agent:'Nuclei - Vulnerability Scan'"
             sarif-export: nuclei.sarif
             github-report: true
