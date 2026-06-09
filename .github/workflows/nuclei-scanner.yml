@@ -17,11 +17,11 @@ jobs:
         id: nuclei_scan
         uses: projectdiscovery/nuclei-action@v3
         with:
-          target: https://jester.social
-          flags: "-id ssh-auth-methods -id tls-version -id rails-debug-mode -id rdap-whois -id ssl-issuer -id http-missing-security-headers"
-          user-agent: "User-Agent:'Nuclei - Vulnerability Scan'"
-          github-report: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          args: -id ssh-auth-methods -id tls-version -id rails-debug-mode -id rdap-whois -id ssl-issuer -id http-missing-security-headers -u https://jester.social
+          config: |
+            user-agent: "User-Agent:'Nuclei - Vulnerability Scan'"
+            github-report: true
+            github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: GitHub Workflow artifacts
         uses: actions/upload-artifact@v4
