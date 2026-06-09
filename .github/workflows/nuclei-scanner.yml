@@ -15,7 +15,7 @@ jobs:
 
       - name: Nuclei - Vulnerability Scan
         id: nuclei_scan
-        uses: projectdiscovery/nuclei-action@main
+        uses: projectdiscovery/nuclei-action@v3
         with:
           target: https://jester.social
           flags: "-id ssh-auth-methods -id tls-version -id rails-debug-mode -id rdap-whois -id ssl-issuer -id http-missing-security-headers"
