@@ -6,10 +6,13 @@ on:
     workflow_dispatch:
 
 jobs:
+
   nuclei-scan:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       issues: write
+      security-events: write
     steps:
       - uses: actions/checkout@v4
 
@@ -35,7 +38,7 @@ jobs:
 # Below uploads results to the security dashboard
 # Requires a public repo, or GHAS
       - name: GitHub Security Dashboard Alerts update
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: success()
         with:
           sarif_file: nuclei.sarif
