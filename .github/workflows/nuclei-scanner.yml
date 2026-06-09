@@ -17,24 +17,23 @@ jobs:
         id: nuclei_scan
         uses: projectdiscovery/nuclei-action@v3
         with:
-          args: -id ssh-auth-methods -id tls-version -id rails-debug-mode -id rdap-whois -id ssl-issuer -id http-missing-security-headers -u https://jester.social
           config: |
+            target: 
+            - https://jester.social
+            flags: "-id ssh-auth-methods -id tls-version -id rails-debug-mode -id rdap-whois -id ssl-issuer -id http-missing-security-headers"
             user-agent: "User-Agent:'Nuclei - Vulnerability Scan'"
+            sarif-export: nuclei.sarif
             github-report: true
             github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: GitHub Workflow artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: nuclei.log
-          path: nuclei.log
-
+# OPTIONAL
 # Below uploads results to the security dashboard
 # Requires a public repo, or GHAS
       - name: GitHub Security Dashboard Alerts update
         uses: github/codeql-action/upload-sarif@v3
-        if: steps.nuclei_scan.outputs.sarif_exists == 'true'
+        if: success()
         with:
           sarif_file: nuclei.sarif
+          category: nuclei-results
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
