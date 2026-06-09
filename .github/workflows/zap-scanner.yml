@@ -1,9 +1,10 @@
+name: ZAP Scan
+
 on:
   workflow_dispatch:
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
-    name: ZAP Scan
     permissions:
       contents: read
       issues: write
