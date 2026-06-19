@@ -18,7 +18,7 @@ jobs:
 
     if: (github.actor != 'dependabot[bot]')
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: semgrep scan --config auto --json > semgrep-output.json
       - name: Upload semgrep output
         uses: actions/upload-artifact@v4
