@@ -38,7 +38,7 @@ jobs:
 # Below uploads results to the security dashboard
 # Requires a public repo, or GHAS
       - name: GitHub Security Dashboard Alerts update
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@v4.37.3
         if: success()
         with:
           sarif_file: nuclei.sarif
